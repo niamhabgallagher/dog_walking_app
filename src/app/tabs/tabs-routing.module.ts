@@ -15,7 +15,7 @@ const routes: Routes = [
             [
               {
                 path: '',
-                loadChildren: () => import('../walk-list/walk-list.module').then( m => m.WalkListPageModule)
+                loadChildren: () => import('../pages/walk-list/walk-list.module').then( m => m.WalkListPageModule)
               }
             ]
         },
@@ -25,7 +25,7 @@ const routes: Routes = [
             [
               {
                 path: '',
-                loadChildren: () => import('../home/home.module').then( m => m.HomePageModule)
+                loadChildren: () => import('../pages/home/home.module').then( m => m.HomePageModule)
               }
             ]
         },
@@ -35,7 +35,7 @@ const routes: Routes = [
             [
               {
                 path: '',
-                loadChildren: () => import('../view-dog/view-dog.module').then( m => m.ViewDogPageModule)
+                loadChildren: () => import('../pages/view-dog/view-dog.module').then( m => m.ViewDogPageModule)
               }
             ]
         },
@@ -45,7 +45,7 @@ const routes: Routes = [
             [
               {
                 path: '',
-                loadChildren: () => import('../view-user/view-user.module').then( m => m.ViewUserPageModule)
+                loadChildren: () => import('../pages/view-user/view-user.module').then( m => m.ViewUserPageModule)
               }
             ]
         },
