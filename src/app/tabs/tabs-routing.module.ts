@@ -1,4 +1,3 @@
-import { HomePageModule } from './../home/home.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
