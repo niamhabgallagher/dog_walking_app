@@ -1,5 +1,7 @@
 {
   "name": "dog_walking_app",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
