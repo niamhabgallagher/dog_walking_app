@@ -53,14 +53,18 @@ const routes: Routes = [
           path: '',
           redirectTo: '/tabs/tab2',
           pathMatch: 'full'
-        }
+        },
+        { path: 'details/:id', loadChildren: './pages/todo-details/todo-details.module#TodoDetailsPageModule' },
+        { path: 'details', loadChildren: './pages/todo-details/todo-details.module#TodoDetailsPageModule' },
       ]
   },
   {
     path: '',
     redirectTo: '/tabs/tab2',
     pathMatch: 'full'
-  }
+  },
+  { path: 'details/:id', loadChildren: './pages/todo-details/todo-details.module#TodoDetailsPageModule' },
+  { path: 'details', loadChildren: './pages/todo-details/todo-details.module#TodoDetailsPageModule' },
 ];
 
 @NgModule({
