@@ -1,7 +1,6 @@
-<ion-header mode="ios">
+<ion-header mode="ios" translucent="true">
   <ion-toolbar>
-    <ion-title>
-    </ion-title>
+    <ion-back-button slot="start"></ion-back-button>
   </ion-toolbar>
 </ion-header>
 
@@ -53,7 +52,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button expand="block" color="tertiary" fill="outline">Login</ion-button>
+        <ion-button expand="block" color="tertiary" fill="outline" (click)="onLogin()">Login</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

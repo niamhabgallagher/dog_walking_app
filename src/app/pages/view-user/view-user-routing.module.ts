@@ -8,11 +8,7 @@ const routes: Routes = [
   {
     path: '',
     component: ViewUserPage
-  },
-  // {
-  //   path: 'login',
-  //   component: LoginPage
-  // }
+  }
 ];
 
 @NgModule({

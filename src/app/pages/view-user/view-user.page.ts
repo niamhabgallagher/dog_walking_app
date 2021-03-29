@@ -19,7 +19,11 @@ export class ViewUserPage implements OnInit {
 
   login() {
     console.log('login nav');
-    // this.navCtrl.navigateForward('/login');
-    this.router.navigate(['/login']);
+    this.navCtrl.navigateForward('/tabs/viewuser/login');
+  }
+
+  register() {
+    console.log('register nav');
+    this.navCtrl.navigateForward('/tabs/viewuser/register');
   }
 }

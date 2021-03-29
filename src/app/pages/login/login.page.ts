@@ -17,6 +17,6 @@ export class LoginPage implements OnInit {
 
   goToRegister() {
     console.log('nav to register');
-    this.navCtrl.navigateForward('/pages/register');
+    this.navCtrl.navigateForward('/tabs/viewuser/register');
   }
 }

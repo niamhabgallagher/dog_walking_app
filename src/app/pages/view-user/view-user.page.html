@@ -10,7 +10,19 @@
   <ion-grid>
     <ion-row>
       <ion-col>
+        <ion-item lines="none" class="ion-text-center">
+          <p>You currently aren't logged in to an account. Log in or sign up below!</p>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
         <ion-button expand="block" color="primary" (click)="login()">Login</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" color="primary" (click)="register()">Register</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
