@@ -6,5 +6,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
+  <div #map id="map"></div>
+
+  <ion-button (click)="startTracking()" *ngIf="!isTracking">
+    <ion-icon name="locate"></ion-icon>
+  </ion-button>
+  <ion-button color="danger" (click)="stopTracking()" *ngIf="isTracking">
+    <ion-icon name="hand"></ion-icon>
+  </ion-button>
 </ion-content>
