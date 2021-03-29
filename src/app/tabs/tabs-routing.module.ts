@@ -1,3 +1,4 @@
+import { LoginPageModule } from './../pages/login/login.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -10,7 +11,7 @@ const routes: Routes = [
     children:
       [
         {
-          path: 'tab1',
+          path: 'walklist',
           children:
             [
               {
@@ -20,7 +21,7 @@ const routes: Routes = [
             ]
         },
         {
-          path: 'tab2',
+          path: 'home',
           children:
             [
               {
@@ -30,7 +31,7 @@ const routes: Routes = [
             ]
         },
         {
-          path: 'tab3',
+          path: 'viewdog',
           children:
             [
               {
@@ -40,18 +41,22 @@ const routes: Routes = [
             ]
         },
         {
-          path: 'tab4',
+          path: 'viewuser',
           children:
             [
               {
                 path: '',
                 loadChildren: () => import('../pages/view-user/view-user.module').then( m => m.ViewUserPageModule)
+              },
+              {
+                path: 'login',
+                loadChildren: () => import('../pages/login/login.module').then( m => m.LoginPageModule)
               }
             ]
         },
         {
           path: '',
-          redirectTo: '/tabs/tab2',
+          redirectTo: '/tabs/home',
           pathMatch: 'full'
         },
         // { path: 'details/:id', loadChildren: './pages/todo-details/todo-details.module#TodoDetailsPageModule' },
@@ -60,7 +65,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/tab2',
+    redirectTo: '/tabs/home',
     pathMatch: 'full'
   },
   // { path: 'details/:id', loadChildren: './pages/todo-details/todo-details.module#TodoDetailsPageModule' },

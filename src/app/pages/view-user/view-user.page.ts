@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-view-user',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewUserPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private navCtrl: NavController,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
 
+  login() {
+    console.log('login nav');
+    // this.navCtrl.navigateForward('/login');
+    this.router.navigate(['/login']);
+  }
 }
