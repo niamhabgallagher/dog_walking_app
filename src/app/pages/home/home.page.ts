@@ -1,7 +1,7 @@
 import { Storage } from '@ionic/storage-angular';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NavController, Platform } from '@ionic/angular';
+import { AlertController, NavController, Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
@@ -27,9 +27,9 @@ export class HomePage {
     public navCtrl: NavController,
     private plt: Platform,
     private geolocation: Geolocation,
-    private storage: Storage
+    private storage: Storage,
+    private alertCtrl: AlertController
   ) {
-    this.storage.create();
   }
 
   ngAfterViewInit() {
@@ -96,14 +96,35 @@ export class HomePage {
     }
   }
 
-  stopTracking() {
-    let newRoute = { finished: new Date().getTime(), path: this.trackedRoute };
-    this.previousTracks.push(newRoute);
-    this.storage.set('routes', this.previousTracks);
-  
-    this.isTracking = false;
-    this.positionSubscription.unsubscribe();
-    this.currentMapTrack.setMap(null);
+  async stopTracking() {
+    const alert = this.alertCtrl.create({
+      header: 'End Walk?',
+      message: 'Are you sure you want to end your walk?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Yes',
+          handler: () => {
+            console.log('Confirm');
+            let newRoute = { finished: new Date().getTime(), path: this.trackedRoute };
+            this.previousTracks.push(newRoute);
+            this.storage.set('routes', this.previousTracks);
+          
+            this.isTracking = false;
+            this.positionSubscription.unsubscribe();
+            this.currentMapTrack.setMap(null);
+          }
+        }
+      ]
+    });
+
+    (await alert).present();
   }
   
   showHistoryRoute(route) {
