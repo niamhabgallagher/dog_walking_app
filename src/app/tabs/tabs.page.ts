@@ -1,4 +1,3 @@
-import { Storage } from '@ionic/storage-angular';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,10 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsPage implements OnInit {
 
-  constructor(private storage: Storage) { }
+  constructor() { }
 
-  async ngOnInit() {
-    await this.storage.create();
+  ngOnInit() {
   }
 
 }

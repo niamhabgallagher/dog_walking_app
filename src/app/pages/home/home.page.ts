@@ -1,4 +1,4 @@
-import { Storage } from '@ionic/storage-angular';
+import { Storage } from '@ionic/storage';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AlertController, NavController, Platform } from '@ionic/angular';
