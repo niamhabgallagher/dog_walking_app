@@ -10,10 +10,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
-// import { AngularFireModule } from '@angular/fire';
-// import { AngularFirestoreModule } from 'angularfire2/firestore';
-// import { environment } from './../environments/environment';
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -22,11 +18,9 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     IonicModule.forRoot(), 
     AppRoutingModule,
     IonicStorageModule.forRoot({
-      name: '__doggi-walks',
-      driverOrder: ['indexeddb', 'sqlite', 'websql']
+      name: '_doggi-walks',
+      driverOrder: ['indexeddb', 'sqlite', 'websql', 'localstorage']
     })
-    // AngularFireModule.initializeApp(environment.firebase),
-    // AngularFirestoreModule
   ],
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

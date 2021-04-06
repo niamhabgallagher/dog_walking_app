@@ -1,4 +1,3 @@
-import { Storage } from '@ionic/storage-angular';
 import { Component } from '@angular/core';
 
 @Component({
@@ -8,6 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   constructor(
-    private storage: Storage
   ) {}
 }
