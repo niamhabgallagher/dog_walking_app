@@ -1,3 +1,4 @@
+import { Route } from '../../model/Route';
 import { Storage } from '@ionic/storage';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 import { Component, ElementRef, ViewChild } from '@angular/core';
@@ -20,6 +21,7 @@ export class HomePage {
   isTracking = false;
   trackedRoute = [];
   previousTracks = [];
+  startTime = 0;
 
   positionSubscription: Subscription;
 
@@ -66,6 +68,7 @@ export class HomePage {
   startTracking() {
     this.isTracking = true;
     this.trackedRoute = [];
+    this.startTime = new Date().getTime();
 
     this.positionSubscription = this.geolocation.watchPosition()
       .pipe(
@@ -88,7 +91,7 @@ export class HomePage {
       this.currentMapTrack = new google.maps.Polyline({
         path: path,
         geodesic: true,
-        strokeColor: '#ff00ff',
+        strokeColor: '#243a2a',
         strokeOpacity: 1.0,
         strokeWeight: 3
       });
@@ -112,7 +115,7 @@ export class HomePage {
           text: 'Yes',
           handler: () => {
             console.log('Confirm');
-            let newRoute = { finished: new Date().getTime(), path: this.trackedRoute };
+            let newRoute: Route = { start: this.startTime, finished: new Date().getTime(), path: this.trackedRoute };
             this.previousTracks.push(newRoute);
             this.storage.set('routes', this.previousTracks);
           
