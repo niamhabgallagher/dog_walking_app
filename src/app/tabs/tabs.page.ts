@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TabsPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private storage: Storage,
+  ) { }
 
   ngOnInit() {
+    this.storage.get('user').then((user) => {
+      if(!user || user == null || user == undefined) {
+        this.storage.set('user', null);
+      } else {
+        // TODO:
+        // get user auth key from firebase
+        // keep them logged in and get all data
+      }
+    });
   }
 
 }
