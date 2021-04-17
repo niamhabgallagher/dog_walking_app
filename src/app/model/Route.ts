@@ -1,3 +1,4 @@
+import { ToiletTally } from './ToiletTally';
 import { Path } from './Path';
 
 export interface Route {
@@ -5,4 +6,6 @@ export interface Route {
     finished: Number;
     path: Path[];
     length?: String;
+    toiletTally?: ToiletTally;
+    walkNotes: String;
 }

@@ -1,3 +1,4 @@
+import { ToiletTally } from './../../model/ToiletTally';
 import { Route } from '../../model/Route';
 import { Storage } from '@ionic/storage';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
@@ -22,6 +23,9 @@ export class HomePage {
   trackedRoute = [];
   previousTracks = [];
   startTime = 0;
+  peeTally = 0;
+  pooTally = 0;
+  walkNotes = '';
 
   positionSubscription: Subscription;
 
@@ -68,6 +72,9 @@ export class HomePage {
   startTracking() {
     this.isTracking = true;
     this.trackedRoute = [];
+    this.peeTally = 0;
+    this.pooTally = 0;
+    this.walkNotes = '';
     this.startTime = new Date().getTime();
 
     this.positionSubscription = this.geolocation.watchPosition()
@@ -114,8 +121,9 @@ export class HomePage {
         }, {
           text: 'Yes',
           handler: () => {
-            console.log('Confirm');
-            let newRoute: Route = { start: this.startTime, finished: new Date().getTime(), path: this.trackedRoute };
+            let tletTally: ToiletTally = { pee: this.peeTally, poo: this.pooTally };
+            let newRoute: Route = { start: this.startTime, finished: new Date().getTime(), path: this.trackedRoute, toiletTally: tletTally, walkNotes: this.walkNotes };
+            console.log('Confirm', newRoute);
             this.previousTracks.push(newRoute);
             this.storage.set('routes', this.previousTracks);
           
@@ -132,5 +140,85 @@ export class HomePage {
   
   showHistoryRoute(route) {
     this.redrawPath(route);
+  }
+
+  async addToilet() {
+    const alert = this.alertCtrl.create({
+      header: 'Did your dog go to the toilet?',
+      inputs: [
+        {
+          name: 'pee',
+          type: 'checkbox',
+          label: 'Pee',
+          value: 'pee'
+        },
+        {
+          name: 'poo',
+          type: 'checkbox',
+          label: 'Poo',
+          value: 'poo'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Confirm',
+          handler: (info) => {
+            console.log('Confirm', info);
+            for (const i of info) {
+              if(i == 'pee'){
+                this.peeTally++;
+              } else if(i == 'poo'){
+                this.pooTally++;
+              }
+            }
+          }
+        }
+      ]
+    });
+
+    (await alert).present();
+  }
+
+  addDog() {
+
+  }
+
+  async addNotes() {
+    const alert = this.alertCtrl.create({
+      header: 'Add Notes',
+      inputs: [
+        {
+          name: 'notes',
+          type: 'textarea',
+          placeholder: 'Enter your walk notes here',
+          value: this.walkNotes
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Confirm',
+          handler: (info) => {
+            console.log('Confirm', info);
+            this.walkNotes = info.notes;
+          }
+        }
+      ]
+    });
+
+    (await alert).present();
   }
 }
