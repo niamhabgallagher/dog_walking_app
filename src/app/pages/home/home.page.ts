@@ -3,9 +3,10 @@ import { Route } from '../../model/Route';
 import { Storage } from '@ionic/storage';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { AlertController, NavController, Platform } from '@ionic/angular';
+import { AlertController, NavController, PickerController, Platform } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { PickerOptions } from "@ionic/core";
 
 declare var google;
 
@@ -26,6 +27,8 @@ export class HomePage {
   peeTally = 0;
   pooTally = 0;
   walkNotes = '';
+  dogsPresent = [];
+  allDogs = [];
 
   positionSubscription: Subscription;
 
@@ -34,7 +37,8 @@ export class HomePage {
     private plt: Platform,
     private geolocation: Geolocation,
     private storage: Storage,
-    private alertCtrl: AlertController
+    private alertCtrl: AlertController,
+    private pickerCtrl: PickerController
   ) {
   }
 
@@ -67,6 +71,11 @@ export class HomePage {
         this.previousTracks = data;
       }
     });
+    this.storage.get('dogList').then((dogs) => {
+      if(dogs) {
+        this.allDogs = dogs;
+      }
+    });
   }
 
   startTracking() {
@@ -76,6 +85,7 @@ export class HomePage {
     this.pooTally = 0;
     this.walkNotes = '';
     this.startTime = new Date().getTime();
+    this.dogsPresent = [];
 
     this.positionSubscription = this.geolocation.watchPosition()
       .pipe(
@@ -122,7 +132,14 @@ export class HomePage {
           text: 'Yes',
           handler: () => {
             let tletTally: ToiletTally = { pee: this.peeTally, poo: this.pooTally };
-            let newRoute: Route = { start: this.startTime, finished: new Date().getTime(), path: this.trackedRoute, toiletTally: tletTally, walkNotes: this.walkNotes };
+            let newRoute: Route = { 
+              start: this.startTime,
+              finished: new Date().getTime(),
+              path: this.trackedRoute,
+              toiletTally: tletTally,
+              walkNotes: this.walkNotes,
+              dogs: this.dogsPresent 
+            };
             console.log('Confirm', newRoute);
             this.previousTracks.push(newRoute);
             this.storage.set('routes', this.previousTracks);
@@ -186,8 +203,36 @@ export class HomePage {
     (await alert).present();
   }
 
-  addDog() {
+  async addDog() {
+    const options: PickerOptions = {
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text:'Add Dog',
+          handler:(value:any) => {
+            console.log(value);
+          }
+        }
+      ],
+      columns:[{
+        name:'Dogs',
+        options:this.getColumnOptions()
+      }]
+    };
 
+    let picker = await this.pickerCtrl.create(options);
+    picker.present()
+  }
+
+  getColumnOptions(){
+    let options = [];
+    this.allDogs.forEach(x => {
+      options.push({text:x.name,value:x.id});
+    });
+    return options;
   }
 
   async addNotes() {
