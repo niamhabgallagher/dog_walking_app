@@ -8,4 +8,5 @@ export interface Route {
     length?: String;
     toiletTally?: ToiletTally;
     walkNotes: String;
+    dogs: String[];
 }
