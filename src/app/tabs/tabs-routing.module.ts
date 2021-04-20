@@ -37,6 +37,10 @@ const routes: Routes = [
               {
                 path: '',
                 loadChildren: () => import('../pages/view-dog/view-dog.module').then( m => m.ViewDogPageModule)
+              },
+              {
+                path: 'adddog',
+                loadChildren: () => import('../pages/add-dog/add-dog.module').then( m => m.AddDogPageModule)
               }
             ]
         },

@@ -1,5 +1,6 @@
 <ion-header>
   <ion-toolbar color="secondary">
+    <ion-back-button slot="start" color="light"></ion-back-button>
     <ion-title color="light">
       Doggi Walks
     </ion-title>
@@ -7,4 +8,72 @@
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Name:</ion-label>
+          <ion-input [(ngModel)]="dogInfo.name" type="text"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>DOB:</ion-label>
+          <ion-datetime [(ngModel)]="dogInfo.dob" displayFormat="DD/MM/YYYY" max="2021"></ion-datetime>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Weight:</ion-label>
+          <ion-input [(ngModel)]="dogInfo.weight.num" type="number"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>KG/LB:</ion-label>
+          <ion-select [(ngModel)]="dogInfo.weight.metric">
+            <ion-select-option>kg</ion-select-option>
+            <ion-select-option>lb</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Breed:</ion-label>
+          <ion-select [(ngModel)]="dogInfo.breed">
+            <ng-container *ngFor="let breed of dogBreeds">
+              <ion-select-option>{{ breed }}</ion-select-option>
+            </ng-container>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Favourite Food:</ion-label>
+          <ion-input [(ngModel)]="dogInfo.favFood" type="text"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Notes:</ion-label>
+          <ion-textarea [(ngModel)]="dogInfo.notes" autoGrow="true"></ion-textarea>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="addDog()" expand="full">Add Dog</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

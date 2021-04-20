@@ -3,8 +3,24 @@
     <ion-title color="light">
       Doggi Walks
     </ion-title>
+    <ion-button slot="end" fill="clear" color="light" (click)="addDog()">
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <!-- <ion-list-header>Previous Walks</ion-list-header> -->
+    <ion-item *ngFor="let dog of listOfDogs">
+      <ion-avatar slot="start">
+        <img [src]="dog.image" />
+      </ion-avatar>
+      <ion-label>
+        <h1>{{ dog.name }}</h1>
+        <p>Breed: {{ dog.breed }}</p>
+        <p>Age: {{ dog.age }} old</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>
