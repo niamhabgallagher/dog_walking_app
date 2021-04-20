@@ -24,9 +24,10 @@ export class AddDogPage implements OnInit {
 
   ngOnInit() {
     this.dogInfo = {
+      id: null,
       name: '',
       dob: '',
-      weight: { num: 0, metric: ''},
+      weight: { num: null, metric: ''},
       breed: '',
       favFood: '',
       notes: '',
@@ -44,6 +45,7 @@ export class AddDogPage implements OnInit {
       }
       this.http.get('https://dog.ceo/api/breeds/image/random').subscribe((res: any) => {
         this.dogInfo.image = res.message
+        this.dogInfo.id = this.allDogs.length;
         this.allDogs.push(this.dogInfo);
         this.storage.set('dogList', this.allDogs).then(async () => {
           console.log('uploaded dog', this.allDogs);

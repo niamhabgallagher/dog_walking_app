@@ -1,4 +1,3 @@
-import { LoginPageModule } from './../pages/login/login.module';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -67,8 +66,6 @@ const routes: Routes = [
           redirectTo: '/tabs/home',
           pathMatch: 'full'
         },
-        // { path: 'details/:id', loadChildren: './pages/todo-details/todo-details.module#TodoDetailsPageModule' },
-        // { path: 'details', loadChildren: './pages/todo-details/todo-details.module#TodoDetailsPageModule' },
       ]
   },
   {
@@ -76,8 +73,6 @@ const routes: Routes = [
     redirectTo: '/tabs/home',
     pathMatch: 'full'
   },
-  // { path: 'details/:id', loadChildren: './pages/todo-details/todo-details.module#TodoDetailsPageModule' },
-  // { path: 'details', loadChildren: './pages/todo-details/todo-details.module#TodoDetailsPageModule' },
 ];
 
 @NgModule({
