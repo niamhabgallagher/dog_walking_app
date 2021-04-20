@@ -10,17 +10,29 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <!-- <ion-list-header>Previous Walks</ion-list-header> -->
-    <ion-item *ngFor="let dog of listOfDogs">
-      <ion-avatar slot="start">
-        <img [src]="dog.image" />
-      </ion-avatar>
-      <ion-label>
-        <h1>{{ dog.name }}</h1>
-        <p>Breed: {{ dog.breed }}</p>
-        <p>Age: {{ dog.age }} old</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-grid>
+    <ion-row *ngIf="!listOfDogs" >
+      <ion-col >
+        <ion-item lines="none" class="ion-text-center">
+          <p>You haven't added any dogs yet. Add them above.</p>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="listOfDogs">
+      <ion-col>
+        <ion-list>
+          <ion-item *ngFor="let dog of listOfDogs">
+            <ion-avatar slot="start">
+              <img [src]="dog.image" />
+            </ion-avatar>
+            <ion-label>
+              <h1>{{ dog.name }}</h1>
+              <p>Breed: {{ dog.breed }}</p>
+              <p>Age: {{ dog.age }} old</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

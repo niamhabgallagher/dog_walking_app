@@ -11,7 +11,7 @@ import * as moment from 'moment';
 })
 export class ViewDogPage implements OnInit {
 
-  listOfDogs: DogInfo[] = [];
+  listOfDogs: DogInfo[];
 
   constructor(
     private navCtrl: NavController,
@@ -23,11 +23,13 @@ export class ViewDogPage implements OnInit {
 
   ionViewWillEnter(){
    this.storage.get('dogList').then((list : DogInfo[]) => {
-     this.listOfDogs = list;
-     for (const dog of this.listOfDogs) {
-       dog.age = moment(dog.dob).toNow(true);
+     if(list) {
+       this.listOfDogs = list;
+       for (const dog of this.listOfDogs) {
+         dog.age = moment(dog.dob).toNow(true);
+       }
      }
-   })
+   });
   }
 
   addDog() {

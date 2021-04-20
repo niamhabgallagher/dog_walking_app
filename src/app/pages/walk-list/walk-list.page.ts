@@ -14,7 +14,7 @@ declare var google;
 })
 export class WalkListPage implements OnInit {
 
-  previousTracks : Route[] = [];
+  previousTracks : Route[];
   @ViewChild('map') mapElement: ElementRef;
   map: any;
   currentMapTrack = null;

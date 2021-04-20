@@ -10,7 +10,11 @@
 <ion-content>
   <div #map id="map"></div>
 
-  <ion-list>
+  <ion-item lines="none" class="ion-text-center">
+    <p>You haven't recorded any walks yet.</p>
+  </ion-item>
+
+  <ion-list *ngIf="previousTracks">
     <ion-list-header>Previous Walks</ion-list-header>
     <ion-item *ngFor="let route of previousTracks">
       <ion-label>
