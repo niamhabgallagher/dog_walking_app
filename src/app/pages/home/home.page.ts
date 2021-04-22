@@ -65,6 +65,10 @@ export class HomePage {
     });
   }
 
+  ionViewWillEnter(){
+   this.loadHistoricRoutes();
+  }
+
   loadHistoricRoutes() {
     this.storage.get('routes').then(data => {
       if (data) {
@@ -214,11 +218,12 @@ export class HomePage {
           text:'Add Dog',
           handler:(value:any) => {
             console.log(value);
+            this.dogsPresent.push(value.dogs.value);
           }
         }
       ],
       columns:[{
-        name:'Dogs',
+        name:'dogs',
         options:this.getColumnOptions()
       }]
     };

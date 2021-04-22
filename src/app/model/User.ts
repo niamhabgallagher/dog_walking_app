@@ -1,7 +1,7 @@
 export interface User {
-    forename: String;
-    surname: String;
-    email: String;
-    password: String;
-    dogs: any[];
+    forename: string;
+    surname: string;
+    email: string;
+    password: string;
+    // dogs?: any[];
 }

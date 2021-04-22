@@ -17,7 +17,7 @@
       <ion-col>
         <ion-item>
           <ion-label position="floating">E-mail:</ion-label>
-          <ion-input type="email" inputmode="email" required="true"></ion-input>
+          <ion-input [(ngModel)]="email" type="email" inputmode="email" required="true"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -25,13 +25,13 @@
       <ion-col>
         <ion-item>
           <ion-label position="floating">Password:</ion-label>
-          <ion-input type="password" inputmode="password" required="true"></ion-input>
+          <ion-input [(ngModel)]="password" type="password" inputmode="password" required="true"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button expand="block" color="primary" >Login</ion-button>
+        <ion-button (click)="onLogin()" expand="block" color="primary" >Login</ion-button>
       </ion-col>
     </ion-row>
     <ion-row>
