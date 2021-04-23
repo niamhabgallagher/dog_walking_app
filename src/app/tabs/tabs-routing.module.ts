@@ -40,6 +40,10 @@ const routes: Routes = [
               {
                 path: 'adddog',
                 loadChildren: () => import('../pages/add-dog/add-dog.module').then( m => m.AddDogPageModule)
+              },
+              {
+                path: 'doginfo',
+                loadChildren: () => import('../pages/dog-info/dog-info.module').then( m => m.DogInfoPageModule)
               }
             ]
         },

@@ -21,16 +21,25 @@
     <ion-row *ngIf="listOfDogs">
       <ion-col>
         <ion-list>
-          <ion-item *ngFor="let dog of listOfDogs">
-            <ion-avatar slot="start">
-              <img [src]="dog.image" />
-            </ion-avatar>
-            <ion-label>
-              <h1>{{ dog.name }}</h1>
-              <p>Breed: {{ dog.breed }}</p>
-              <p>Age: {{ dog.age }} old</p>
-            </ion-label>
-          </ion-item>
+          <ng-container *ngFor="let dog of listOfDogs; let i = index">
+          <ion-item-sliding>
+              <ion-item (click)="dogInfo(dog)">
+                <ion-avatar slot="start">
+                  <img [src]="dog.image" />
+                </ion-avatar>
+                <ion-label>
+                  <h1>{{ dog.name }}</h1>
+                  <p>Breed: {{ dog.breed }}</p>
+                  <p>Age: {{ dog.age }} old</p>
+                </ion-label>
+              </ion-item>
+              <ion-item-options side="end">
+                <ion-item-option (click)="deleteDog(dog, i)" color="danger">
+                  <ion-icon slot="icon-only" icon="trash"></ion-icon>
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ng-container>
         </ion-list>
       </ion-col>
     </ion-row>
