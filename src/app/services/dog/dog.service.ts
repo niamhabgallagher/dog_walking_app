@@ -21,6 +21,7 @@ export class DogService {
           const data = a.payload.doc.data();
           const id = a.payload.doc.id;
 
+          data.id = id;
           return {id, ...data};
         });
       })
