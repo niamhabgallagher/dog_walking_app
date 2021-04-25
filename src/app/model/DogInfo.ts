@@ -1,5 +1,5 @@
 export interface DogInfo {
-    id: Number;
+    id: any;
     name: String;
     dob: string;
     age?: String;
