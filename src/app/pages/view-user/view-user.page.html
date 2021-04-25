@@ -1,29 +1,50 @@
-<ion-header>
-  <ion-toolbar color="secondary">
-    <ion-title color="light">
-      Doggi Walks
+<ion-header class="ion-no-border">
+  <ion-toolbar color="light">
+    <ion-title class="ion-text-center">
+      <img src="../../../assets/Logo.png"/>
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-item lines="none" class="ion-text-center">
-          <p>You currently aren't logged in to an account. Log in or sign up below!</p>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button expand="block" color="primary" (click)="login()">Login</ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-button expand="block" color="primary" (click)="register()">Register</ion-button>
-      </ion-col>
-    </ion-row>
+    <ng-container *ngIf="!userInfo">
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none" class="ion-text-center">
+            <p>You currently aren't logged in to an account. Log in or sign up below!</p>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" color="primary" (click)="login()">Login</ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" color="primary" (click)="register()">Register</ion-button>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+
+    <ng-container *ngIf="userInfo">
+      <ion-row >
+        <ion-col>
+          <ion-item lines="none">
+            <ion-text>
+              <p><b>Name:</b> {{ userInfo.forename }} {{ userInfo.surname }}</p>
+              <p><b>E-mail:</b> {{ userInfo.email }}</p>
+              <p><b>Number of dogs:</b> </p>
+            </ion-text>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-button expand="block" (click)="logout()">Log out</ion-button>
+        </ion-col>
+      </ion-row>
+    </ng-container>
   </ion-grid>
 </ion-content>
