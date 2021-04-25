@@ -47,6 +47,14 @@
     </ion-row>
     <ion-row>
       <ion-col>
+        <ion-item>
+          <ion-label position="floating">Confirm Password:</ion-label>
+          <ion-input [(ngModel)]="register.confirmPass" type="password" inputmode="password" required="true"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
         <ion-button (click)="onRegister()" expand="block" color="primary">Register</ion-button>
       </ion-col>
     </ion-row>
