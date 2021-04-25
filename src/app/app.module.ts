@@ -12,6 +12,11 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { FirebaseX } from "@ionic-native/firebase-x/ngx";
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment'
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,12 +30,16 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
       driverOrder: ['indexeddb', 'sqlite', 'websql', 'localstorage']
     }),
     HttpClientModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [
+    SplashScreen,
+    StatusBar,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Geolocation,
-    FirebaseAuthentication
+    FirebaseAuthentication,
+    FirebaseX
   ],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "53929419445",
+    "firebase_url": "https://doggi-walks-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "doggi-walks",
+    "storage_bucket": "doggi-walks.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53929419445:android:8cf4db9eac3971eecf94fc",
+        "android_client_info": {
+          "package_name": "com.doggiwalks"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53929419445-qmmoapiq9167098hf52ik48vomj9sqdn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChKn0Em87fuZm0WMFglMtFWJ-yjRehZCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53929419445-qmmoapiq9167098hf52ik48vomj9sqdn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
