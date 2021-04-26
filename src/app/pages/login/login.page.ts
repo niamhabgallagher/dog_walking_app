@@ -49,24 +49,10 @@ export class LoginPage implements OnInit {
           console.log('success', res);
           this.navCtrl.pop();
           this.loadingServ.dismissLoading();
-          const toast = this.toastCtrl.create({
-            message: 'You are logged in',
-            duration: 2000,
-            color: 'success'
-          });
-    
-          (await toast).present();
           this.resetLogin();
         } else {
           console.log('ERROR NO USERS', users);
           this.loadingServ.dismissLoading();
-          const toast = this.toastCtrl.create({
-            message: 'Error logging in',
-            duration: 2000,
-            color: 'danger'
-          });
-    
-          (await toast).present();
         }
       });
     })
