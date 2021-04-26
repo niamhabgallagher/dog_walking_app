@@ -15,7 +15,7 @@
     <ion-row *ngIf="!listOfDogs" >
       <ion-col >
         <ion-item lines="none" class="ion-text-center">
-          <p>You haven't added any dogs yet. Add them above.</p>
+          <h4>You haven't added any dogs yet. Add them above.</h4>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -31,8 +31,8 @@
                 </ion-avatar>
                 <ion-label>
                   <h1>{{ dog.name }}</h1>
-                  <p>Breed: {{ dog.breed }}</p>
-                  <p>Age: {{ dog.age }} old</p>
+                  <h4>Breed: {{ dog.breed }}</h4>
+                  <h4>Age: {{ dog.age }} old</h4>
                 </ion-label>
               </ion-item>
               <ion-item-options side="end">

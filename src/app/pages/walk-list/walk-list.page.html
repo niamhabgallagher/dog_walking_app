@@ -10,8 +10,8 @@
 <ion-content>
   <div #map id="map"></div>
 
-  <ion-item lines="none" class="ion-text-center">
-    <p>You haven't recorded any walks yet.</p>
+  <ion-item lines="none" class="ion-text-center" *ngIf="!previousTracks">
+    <h4>You haven't recorded any walks yet.</h4>
   </ion-item>
 
   <ion-list *ngIf="previousTracks">
