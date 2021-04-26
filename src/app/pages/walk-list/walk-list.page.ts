@@ -1,8 +1,10 @@
+import { WalkService } from './../../services/walk/walk.service';
+import { InfoService } from './../../services/info/info.service';
 import { Route } from './../../model/route';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Storage } from '@ionic/storage';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import * as moment from 'moment';
 
 declare var google;
@@ -22,14 +24,16 @@ export class WalkListPage implements OnInit {
   constructor(
     private storage: Storage,
     private plt: Platform,
-    private geolocation: Geolocation
+    private geolocation: Geolocation,
+    private walkServ: WalkService,
+    private navCtrl: NavController,
+    private infoServ: InfoService
   ) { }
 
   ngOnInit() {
   }
 
-
-  ngAfterViewInit() {
+  ionViewWillEnter() {
     this.plt.ready().then(() => {
       this.loadHistoricRoutes();
 
@@ -53,19 +57,34 @@ export class WalkListPage implements OnInit {
   }
 
   loadHistoricRoutes() {
-    this.storage.get('routes').then(data => {
-      if (data) {
-        this.previousTracks = data;
-        for (const route of this.previousTracks) {
-          this.findLength(route.start, route.finished).then((length) => {
-            if(length) {
-              route.length = length;
-            }
-          });
-        }
-        console.log(this.previousTracks);
+    this.storage.get('user_info').then((user) => {
+      if(user) {
+        this.walkServ.getWalks().subscribe((walks) => {
+          console.log('walks', walks);
+          this.previousTracks = walks;
+          for (const route of this.previousTracks) {
+            this.findLength(route.start, route.finished).then((length) => {
+              if(length) {
+                route.length = length;
+              }
+            });
+          }
+          console.log(this.previousTracks);
+        });
       } else {
-        console.log('no data');
+        this.storage.get('routes').then(data => {
+          if (data) {
+            this.previousTracks = data;
+            for (const route of this.previousTracks) {
+              this.findLength(route.start, route.finished).then((length) => {
+                if(length) {
+                  route.length = length;
+                }
+              });
+            }
+            console.log(this.previousTracks);
+          }
+        });
       }
     });
   }
@@ -102,7 +121,9 @@ export class WalkListPage implements OnInit {
   }
 
   viewNotes(route) {
-    
+    console.log('chosen route', route);
+    this.infoServ.walkInfo = route;
+    this.navCtrl.navigateForward('tabs/walklist/walkinfo');
   }
 
 }
