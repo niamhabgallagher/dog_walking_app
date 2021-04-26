@@ -31,7 +31,7 @@ export class ViewDogPage implements OnInit {
   ionViewWillEnter(){
     this.storage.get('user_info').then((user) => {
       this.user = user;
-      if(this.user) {
+      if(this.user && this.user != undefined) {
         this.getDogs();
       } else {
         this.storage.get('dogList').then((list : DogInfo[]) => {
@@ -84,5 +84,13 @@ export class ViewDogPage implements OnInit {
       }
       console.log('logged in', this.listOfDogs);
     });
+  }
+
+  editDog(dog, i){
+    this.info.editDog = dog;
+    this.info.editDogInt = i;
+    this.info.edit = true;
+    console.log('go to: view dog pg', this.info.dogInfo);
+    this.navCtrl.navigateForward('/tabs/viewdog/adddog');
   }
 }

@@ -9,6 +9,9 @@ import { Injectable } from '@angular/core';
 export class InfoService {
 
   public dogInfo: DogInfo;
+  public editDog: DogInfo;
+  public editDogInt: number;
+  public edit = false;
   public user: User;
   public walkInfo: Route;
 

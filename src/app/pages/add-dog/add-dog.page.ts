@@ -1,3 +1,5 @@
+import { User } from './../../model/User';
+import { InfoService } from './../../services/info/info.service';
 import { DogService } from './../../services/dog/dog.service';
 import { LoadingService } from './../../services/loading/loading.service';
 import { Storage } from '@ionic/storage';
@@ -23,7 +25,8 @@ export class AddDogPage implements OnInit {
     private navCtrl: NavController,
     private toastCtrl: ToastController,
     private loadingServ: LoadingService,
-    private dogServ: DogService
+    private dogServ: DogService,
+    public infoServ: InfoService
   ) { }
 
   ngOnInit() {
@@ -31,6 +34,9 @@ export class AddDogPage implements OnInit {
     this.http.get('./assets/dog-breeds.json').subscribe((breeds: any) => {
       this.dogBreeds = breeds.breeds;
     });
+    if(this.infoServ.edit = true) {
+      this.dogInfo = this.infoServ.editDog;
+    }
   }
 
   addDog() {
@@ -80,6 +86,25 @@ export class AddDogPage implements OnInit {
     });
   }
 
+  editDog() {
+    this.storage.get('user_info').then((user) => {
+      if(user) {
+        this.dogServ.updateDog(this.dogInfo, this.dogInfo.id).then(() => {
+          this.infoServ.dogInfo = this.dogInfo;
+          this.resetDogInfo();
+          this.resetEdit();
+          this.navCtrl.pop();
+        });
+      } else {
+        this.allDogs[this.infoServ.editDogInt] = this.dogInfo;
+        this.infoServ.dogInfo = this.dogInfo;
+        this.resetDogInfo();
+        this.resetEdit();
+        this.navCtrl.pop();
+      }
+    });
+  }
+
   resetDogInfo() {
     this.dogInfo = {
       id: null,
@@ -91,6 +116,12 @@ export class AddDogPage implements OnInit {
       notes: '',
       image: ''
     }
+  }
+
+  resetEdit() {
+    this.infoServ.edit = false;
+    this.infoServ.editDog = undefined;
+    this.infoServ.editDogInt = undefined;
   }
 
 }
