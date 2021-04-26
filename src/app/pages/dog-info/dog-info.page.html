@@ -27,7 +27,14 @@
         <h4><b>DOB:</b> {{ dog.dob | date }}</h4>
         <h4><b>Age:</b> {{ dog.age }}</h4>
         <h4><b>Favourite Food:</b> {{ dog.favFood }}</h4>
-        <h4><b>Notes:</b> {{ dog.notes }}</h4>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <h4><b>Notes:</b></h4>
+          <ion-textarea autoGrow="true" [(ngModel)]="dog.notes" (ionChange)="notesChange()"></ion-textarea>
+        </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid>
