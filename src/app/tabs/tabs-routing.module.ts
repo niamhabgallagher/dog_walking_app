@@ -16,6 +16,10 @@ const routes: Routes = [
               {
                 path: '',
                 loadChildren: () => import('../pages/walk-list/walk-list.module').then( m => m.WalkListPageModule)
+              },
+              {
+                path: 'walkinfo',
+                loadChildren: () => import('../pages/walk-info/walk-info.module').then( m => m.WalkInfoPageModule)
               }
             ]
         },

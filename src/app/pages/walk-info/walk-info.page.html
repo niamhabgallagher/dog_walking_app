@@ -1,5 +1,6 @@
 <ion-header>
   <ion-toolbar color="secondary">
+    <ion-back-button slot="start" color="light"></ion-back-button>
     <ion-title color="light">
       Doggi Walks
     </ion-title>
@@ -7,4 +8,43 @@
 </ion-header>
 
 <ion-content>
+  <div #map id="map"></div>
+
+  <ion-grid *ngIf="walk">
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none">
+          <ion-text>
+            <h4><b>Walk Date:</b> {{ walk.finished | date }}</h4>
+            <h4><b>Walk Length:</b> {{ walk.length }}</h4>
+          </ion-text>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none">
+          <ion-thumbnail>
+            <img src="../../../assets/images/poo.png" />
+          </ion-thumbnail>
+          <h4>{{ walk.toiletTally.poo }}</h4>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item lines="none">
+          <ion-thumbnail>
+            <img src="../../../assets/images/pee.png" />
+          </ion-thumbnail>
+          <h4>{{ walk.toiletTally.pee }}</h4>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none">
+          <h4><b>Notes:</b> {{ walk.walkNotes }}</h4>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
