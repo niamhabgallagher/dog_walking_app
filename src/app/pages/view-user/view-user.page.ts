@@ -56,7 +56,11 @@ export class ViewUserPage implements OnInit {
       if(user) {
         this.userInfo = user;
         this.dogServ.getDogs().subscribe((dogs) => {
-          this.numOfDogs = dogs.length;
+          if(dogs) {
+            this.numOfDogs = dogs.length;
+          } else {
+            this.numOfDogs = 0;
+          }
         });
         console.log('user', this.userInfo);
         console.log('numOfDogs', this.numOfDogs);
