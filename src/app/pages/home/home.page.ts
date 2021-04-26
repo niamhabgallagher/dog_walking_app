@@ -1,3 +1,6 @@
+import { User } from './../../model/User';
+import { DogService } from './../../services/dog/dog.service';
+import { WalkService } from './../../services/walk/walk.service';
 import { ToiletTally } from './../../model/ToiletTally';
 import { Route } from '../../model/Route';
 import { Storage } from '@ionic/storage';
@@ -29,6 +32,7 @@ export class HomePage {
   walkNotes = '';
   dogsPresent = [];
   allDogs = [];
+  user: User;
 
   positionSubscription: Subscription;
 
@@ -38,7 +42,9 @@ export class HomePage {
     private geolocation: Geolocation,
     private storage: Storage,
     private alertCtrl: AlertController,
-    private pickerCtrl: PickerController
+    private pickerCtrl: PickerController,
+    private walkServ: WalkService,
+    private dogServ: DogService
   ) {
   }
 
@@ -70,14 +76,26 @@ export class HomePage {
   }
 
   loadHistoricRoutes() {
-    this.storage.get('routes').then(data => {
-      if (data) {
-        this.previousTracks = data;
-      }
-    });
-    this.storage.get('dogList').then((dogs) => {
-      if(dogs) {
-        this.allDogs = dogs;
+    this.storage.get('user_info').then((user) => {
+      this.user = user;
+      if(user) {
+        this.walkServ.getWalks().subscribe((walks) => {
+          this.previousTracks = walks;
+        });
+        this.dogServ.getDogs().subscribe((dogs) => {
+          this.allDogs = dogs;
+        })
+      } else {
+        this.storage.get('routes').then(data => {
+          if (data) {
+            this.previousTracks = data;
+          }
+        });
+        this.storage.get('dogList').then((dogs) => {
+          if(dogs) {
+            this.allDogs = dogs;
+          }
+        });
       }
     });
   }
@@ -145,12 +163,21 @@ export class HomePage {
               dogs: this.dogsPresent 
             };
             console.log('Confirm', newRoute);
-            this.previousTracks.push(newRoute);
-            this.storage.set('routes', this.previousTracks);
-          
-            this.isTracking = false;
-            this.positionSubscription.unsubscribe();
-            this.currentMapTrack.setMap(null);
+            if(this.user) {
+              this.walkServ.addWalk(newRoute).then(() => {
+                this.isTracking = false;
+                this.positionSubscription.unsubscribe();
+                this.currentMapTrack.setMap(null);
+              }).catch((error) => {
+                console.error('error', error);
+              });
+            } else {
+              this.previousTracks.push(newRoute);
+              this.storage.set('routes', this.previousTracks);
+              this.isTracking = false;
+              this.positionSubscription.unsubscribe();
+              this.currentMapTrack.setMap(null);
+            }
           }
         }
       ]

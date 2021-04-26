@@ -1,3 +1,4 @@
+import { DogService } from './../../services/dog/dog.service';
 import { User } from './../../model/User';
 import { Storage } from '@ionic/storage';
 import { Component, OnInit } from '@angular/core';
@@ -13,11 +14,13 @@ import { AngularFireAuth } from '@angular/fire/auth';
 export class ViewUserPage implements OnInit {
 
   userInfo: User;
+  numOfDogs: Number;
 
   constructor(
     private navCtrl: NavController,
     private storage: Storage,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private dogServ: DogService
   ) { }
 
   ngOnInit() {
@@ -52,7 +55,11 @@ export class ViewUserPage implements OnInit {
     this.storage.get('user_info').then((user) => {
       if(user) {
         this.userInfo = user;
+        this.dogServ.getDogs().subscribe((dogs) => {
+          this.numOfDogs = dogs.length;
+        });
         console.log('user', this.userInfo);
+        console.log('numOfDogs', this.numOfDogs);
       } else {
         this.userInfo = undefined;
       }
