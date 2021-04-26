@@ -14,7 +14,7 @@ export class WalkService {
   private walks: Observable<Route[]>
 
   constructor(db: AngularFirestore) { 
-    this.walkCollection = db.collection<Route>('dog_info');
+    this.walkCollection = db.collection<Route>('walk_list');
 
     this.walks = this.walkCollection.snapshotChanges().pipe(
       map(actions => {
@@ -22,6 +22,7 @@ export class WalkService {
           const data = a.payload.doc.data();
           const id = a.payload.doc.id;
 
+          data.id = id;
           return {id, ...data};
         });
       })
