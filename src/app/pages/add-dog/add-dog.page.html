@@ -72,8 +72,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button *ngIf="infoServ.edit == false" (click)="addDog()" expand="full">Add Dog</ion-button>
-        <ion-button *ngIf="infoServ.edit == true" (click)="editDog()" expand="full">Save</ion-button>
+        <ion-button (click)="addDog()" expand="full">Add Dog</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

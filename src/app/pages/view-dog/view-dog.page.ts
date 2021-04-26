@@ -85,12 +85,4 @@ export class ViewDogPage implements OnInit {
       console.log('logged in', this.listOfDogs);
     });
   }
-
-  editDog(dog, i){
-    this.info.editDog = dog;
-    this.info.editDogInt = i;
-    this.info.edit = true;
-    console.log('go to: view dog pg', this.info.dogInfo);
-    this.navCtrl.navigateForward('/tabs/viewdog/adddog');
-  }
 }
