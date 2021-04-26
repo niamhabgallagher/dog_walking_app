@@ -78,8 +78,10 @@ export class RegisterPage implements OnInit {
           });
     
           (await toast).present();
+          this.loadingServ.dismissLoading();
         } else {
           console.error('error', error);
+          this.loadingServ.dismissLoading();
         }
       });
     }
