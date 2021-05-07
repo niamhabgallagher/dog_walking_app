@@ -24,10 +24,8 @@ export class LoadingService {
   }
 
   dismissLoading() {
-    if(this.loading == true) {
-      this.loadingController.dismiss().then(() => this.loading = false);
-      console.log('loading dismissed');
-    }
+    this.loadingController.dismiss().then(() => this.loading = false);
+    console.log('loading dismissed');
   }
 
 
