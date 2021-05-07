@@ -10,4 +10,6 @@ export interface Route {
     toiletTally?: ToiletTally;
     walkNotes: String;
     dogs: String[];
+    likeWalk: boolean;
+    lead: boolean;
 }

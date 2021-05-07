@@ -27,12 +27,10 @@ export class AddDogPage implements OnInit {
   ) { }
 
   ngOnInit() {
-  }
-
-  ionViewWillEnter(){
     this.resetDogInfo();
     this.http.get('./assets/dog-breeds.json').subscribe((breeds: any) => {
       this.dogBreeds = breeds.breeds;
+      console.log('got breeds', this.dogBreeds);
     });
   }
 
@@ -43,12 +41,12 @@ export class AddDogPage implements OnInit {
     this.storage.get('user_info').then((user) => {
       if(user) {
         this.dogServ.addDog(this.dogInfo).then(async (res) => {
-          console.log('added', res);
+          console.log('ADDED', res);
           this.dogServ.getDogs().subscribe((dogs) => this.allDogs = dogs);
           console.log('uploaded dog', this.allDogs);
           this.navCtrl.pop();
-          this.resetDogInfo();
           this.loadingServ.dismissLoading();
+          this.resetDogInfo();
           const toast = this.toastCtrl.create({
             message: this.dogInfo.name + ' has been added!',
             position: 'bottom',
@@ -92,7 +90,8 @@ export class AddDogPage implements OnInit {
       breed: '',
       favFood: '',
       notes: '',
-      image: ''
+      image: '',
+      neededExercise: { hours: null, minutes: null }
     }
   }
 

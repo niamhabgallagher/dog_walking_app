@@ -82,7 +82,6 @@ export class ViewDogPage implements OnInit {
       for (const dog of this.listOfDogs) {
         dog.age = moment(dog.dob).toNow(true);
       }
-      console.log('logged in', this.listOfDogs);
     });
   }
 }

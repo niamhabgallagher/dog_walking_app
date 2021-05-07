@@ -1,9 +1,11 @@
+import { DogService } from './../../services/dog/dog.service';
 import { InfoService } from './../../services/info/info.service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Route } from './../../model/Route';
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import * as moment from 'moment';
+import { DogInfo } from 'src/app/model/DogInfo';
 
 declare var google;
 
@@ -20,11 +22,13 @@ export class WalkInfoPage implements OnInit {
   currentMapTrack = null;
 
   walk: Route;
+  dogs: DogInfo[];
 
   constructor(
     private plt: Platform,
     private geolocation: Geolocation,
-    private infoServ: InfoService
+    private infoServ: InfoService,
+    private dogServ: DogService
   ) { }
 
   ngOnInit() {
@@ -32,6 +36,7 @@ export class WalkInfoPage implements OnInit {
 
   ionViewWillEnter(){
     this.plt.ready().then(() => {
+      this.dogs = [];
       this.walk = this.infoServ.walkInfo;
       let mapOptions = {
         zoom: 13,
@@ -52,6 +57,13 @@ export class WalkInfoPage implements OnInit {
 
       if(this.walk) {
         this.redrawPath(this.walk.path);
+
+        for (const dog of this.walk.dogs) {
+          this.dogServ.getDog(dog).subscribe((dog) => {
+            console.log(dog);
+            this.dogs.push(dog);
+          })
+        }
       }
     });
   }

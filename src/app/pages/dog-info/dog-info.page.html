@@ -27,6 +27,8 @@
         <h4><b>DOB:</b> {{ dog.dob | date }}</h4>
         <h4><b>Age:</b> {{ dog.age }}</h4>
         <h4><b>Favourite Food:</b> {{ dog.favFood }}</h4>
+        <h4><b>Weight:</b> {{ dog.weight.num }}{{ dog.weight.metric }}</h4>
+        <h4><b>Amount of exercise needed:</b> {{ dog.neededExercise.hours }} hours {{ dog.neededExercise.minutes }} minutes</h4>
       </ion-col>
     </ion-row>
     <ion-row>

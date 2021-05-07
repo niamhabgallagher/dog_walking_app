@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AddDogPageRoutingModule } from './add-dog-routing.module';
 
 import { AddDogPage } from './add-dog.page';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AddDogPageRoutingModule
+    AddDogPageRoutingModule,
+    IonicSelectableModule
   ],
   declarations: [AddDogPage]
 })

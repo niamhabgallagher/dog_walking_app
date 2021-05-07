@@ -42,18 +42,14 @@ export class RegisterPage implements OnInit {
     if(this.register.password == this.register.confirmPass) {
       this.loadingServ.presentLoading();
       this.afAuth.createUserWithEmailAndPassword(this.register.email, this.register.password).then(async (res) => {
-        console.log('success', res);
         await this.afAuth.idToken.subscribe((token) => this.register.token = token);
         this.register.password = '';
         this.register.confirmPass = '';
-        console.log('user', this.register);
         this.userServ.addUser(this.register).then(async (res) => {
           await this.uploadPastDogs();
           await this.uploadWalks();
-          console.log("Successfully added document ", res);
           this.storage.set('user_info', this.register);
           this.storage.set('token', this.register.token);
-          console.log('SUCCESS user', this.register);
           this.loadingServ.dismissLoading();
           this.navCtrl.pop();
           this.resetRegister();

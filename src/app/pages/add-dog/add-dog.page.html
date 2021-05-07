@@ -42,15 +42,37 @@
         </ion-item>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="allDogs">
       <ion-col>
         <ion-item>
           <ion-label>Breed:</ion-label>
-          <ion-select [(ngModel)]="dogInfo.breed" required="true">
-            <ng-container *ngFor="let breed of dogBreeds">
-              <ion-select-option>{{ breed }}</ion-select-option>
-            </ng-container>
-          </ion-select>
+          <ionic-selectable
+            [(ngModel)]="dogInfo.breed"
+            [items]="dogBreeds"
+            [canSearch]="true"
+            required="true">
+          </ionic-selectable>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item lines="none">
+          <ion-label>Amount of exercise needed:</ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Hours:</ion-label>
+          <ion-input type="number" [(ngModel)]="this.dogInfo.neededExercise.hours"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label>Minutes:</ion-label>
+          <ion-input type="number" [(ngModel)]="this.dogInfo.neededExercise.minutes"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>

@@ -15,9 +15,32 @@
       <ion-col>
         <ion-item lines="none">
           <ion-text>
-            <h4><b>Walk Date:</b> {{ walk.finished | date }}</h4>
+            <h4><b>Walk Date:</b> {{ walk.start | date }}</h4>
             <h4><b>Walk Length:</b> {{ walk.length }}</h4>
           </ion-text>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item *ngIf="walk.likeWalk == true" lines="none">
+          <ion-icon slot="start" color="tertiary" name="happy-outline"></ion-icon>
+          <h4>Your dog(s) liked this walk!</h4>
+        </ion-item>
+        <ion-item *ngIf="walk.likeWalk == false" lines="none">
+          <ion-icon slot="start" color="danger" name="sad-outline"></ion-icon>
+          <h4>Your dog(s) didn't like this walk.</h4>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="walk.lead">
+      <ion-col>
+        <ion-item lines="none">
+          <ion-thumbnail slot="start">
+            <img src="../../../assets/images/lead.png" />
+          </ion-thumbnail>
+          <h4 *ngIf="walk.lead == true">Your dog(s) were walking on lead.</h4>
+          <h4 *ngIf="walk.lead == false">Your dog(s) were walking off lead.</h4>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -27,7 +50,7 @@
           <ion-thumbnail>
             <img src="../../../assets/images/poo.png" />
           </ion-thumbnail>
-          <h4>{{ walk.toiletTally.poo }}</h4>
+          <h4>    {{ walk.toiletTally.poo }}</h4>
         </ion-item>
       </ion-col>
       <ion-col>
@@ -35,7 +58,22 @@
           <ion-thumbnail>
             <img src="../../../assets/images/pee.png" />
           </ion-thumbnail>
-          <h4>{{ walk.toiletTally.pee }}</h4>
+          <h4>    {{ walk.toiletTally.pee }}</h4>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="dogs.length > 0">
+      <ion-col>
+        <ion-item lines="none">
+          <h4><b>Dogs present on the walk:</b></h4>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="dogs.length > 0">
+      <ion-col>
+        <ion-item *ngFor="let dog of dogs">
+          <ion-avatar><img [src]="dog.image" /></ion-avatar>
+          <h4>{{ dog.name }}</h4>
         </ion-item>
       </ion-col>
     </ion-row>

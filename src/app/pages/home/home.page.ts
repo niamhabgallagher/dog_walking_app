@@ -33,6 +33,8 @@ export class HomePage {
   dogsPresent = [];
   allDogs = [];
   user: User;
+  likeWalkBool: boolean;
+  onLead: boolean;
 
   positionSubscription: Subscription;
 
@@ -108,6 +110,8 @@ export class HomePage {
     this.walkNotes = '';
     this.startTime = new Date().getTime();
     this.dogsPresent = [];
+    this.likeWalkBool = false;
+    this.onLead = null;
 
     this.positionSubscription = this.geolocation.watchPosition()
       .pipe(
@@ -153,31 +157,35 @@ export class HomePage {
         }, {
           text: 'Yes',
           handler: () => {
-            let tletTally: ToiletTally = { pee: this.peeTally, poo: this.pooTally };
-            let newRoute: Route = { 
-              start: this.startTime,
-              finished: new Date().getTime(),
-              path: this.trackedRoute,
-              toiletTally: tletTally,
-              walkNotes: this.walkNotes,
-              dogs: this.dogsPresent 
-            };
-            console.log('Confirm', newRoute);
-            if(this.user) {
-              this.walkServ.addWalk(newRoute).then(() => {
+            this.likeWalk().then(() => {
+              let tletTally: ToiletTally = { pee: this.peeTally, poo: this.pooTally };
+              let newRoute: Route = { 
+                start: this.startTime,
+                finished: new Date().getTime(),
+                path: this.trackedRoute,
+                toiletTally: tletTally,
+                walkNotes: this.walkNotes,
+                dogs: this.dogsPresent ,
+                likeWalk: this.likeWalkBool,
+                lead: this.onLead
+              };
+              console.log('Confirm', newRoute);
+              if(this.user) {
+                this.walkServ.addWalk(newRoute).then(() => {
+                  this.isTracking = false;
+                  this.positionSubscription.unsubscribe();
+                  this.currentMapTrack.setMap(null);
+                }).catch((error) => {
+                  console.error('error', error);
+                });
+              } else {
+                this.previousTracks.push(newRoute);
+                this.storage.set('routes', this.previousTracks);
                 this.isTracking = false;
                 this.positionSubscription.unsubscribe();
                 this.currentMapTrack.setMap(null);
-              }).catch((error) => {
-                console.error('error', error);
-              });
-            } else {
-              this.previousTracks.push(newRoute);
-              this.storage.set('routes', this.previousTracks);
-              this.isTracking = false;
-              this.positionSubscription.unsubscribe();
-              this.currentMapTrack.setMap(null);
-            }
+              }
+            });
           }
         }
       ]
@@ -291,6 +299,57 @@ export class HomePage {
           handler: (info) => {
             console.log('Confirm', info);
             this.walkNotes = info.notes;
+          }
+        }
+      ]
+    });
+
+    (await alert).present();
+  }
+
+  likeWalk() {
+    return new Promise<void>(async (resolve, reject) => {
+      const alert = this.alertCtrl.create({
+        header: 'Did your dog like the walk?',
+        buttons: [
+          {
+            text: 'No',
+            cssClass: 'danger',
+            handler: () => {
+              this.likeWalkBool = false;
+              console.log('like walk?', this.likeWalkBool);
+              resolve();
+            }
+          }, {
+            text: 'Yes',
+            cssClass: 'primary',
+            handler: () => {
+              this.likeWalkBool = true;
+              console.log('like walk?', this.likeWalkBool);
+              resolve();
+            }
+          }
+        ]
+      });
+      (await alert).present();
+    });
+  }
+
+  async lead() {
+    const alert = this.alertCtrl.create({
+      header: 'Is your dog on lead?',
+      buttons: [
+        {
+          text: 'No',
+          cssClass: 'danger',
+          handler: () => {
+            this.onLead = false;
+          }
+        }, {
+          text: 'Yes',
+          cssClass: 'primary',
+          handler: () => {
+            this.onLead = true;
           }
         }
       ]

@@ -8,4 +8,5 @@ export interface DogInfo {
     favFood: String;
     notes: String;
     image: String;
+    neededExercise: { hours: Number; minutes: Number; };
 }

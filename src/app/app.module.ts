@@ -17,6 +17,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { FirebaseX } from "@ionic-native/firebase-x/ngx";
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment'
+import { IonicSelectableModule } from 'ionic-selectable';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +32,8 @@ import { environment } from '../environments/environment'
     }),
     HttpClientModule,
     AngularFirestoreModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    IonicSelectableModule
   ],
   providers: [
     SplashScreen,
