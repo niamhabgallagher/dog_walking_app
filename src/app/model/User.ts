@@ -6,5 +6,5 @@ export interface User {
     confirmPass?: string;
     token?: string;
     documentId?: string;
-    // dogs?: any[];
+    //dogs?: any[];
 }

@@ -1,6 +1,5 @@
 import { Route } from './../../model/Route';
 import { map } from 'rxjs/operators';
-import { DogInfo } from './../../model/DogInfo';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
