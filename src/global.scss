@@ -24,3 +24,32 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+ion-toolbar {
+    padding: 0;
+    .logo-wrapper {
+        display: flex;
+        height: 35px;
+        img.logo-icon {
+            height: 100%;
+            margin: 0 5px;
+        }
+        img.logo-name {
+            height: 25px;
+            margin-top: 8px;
+        }
+    }
+    ion-title {
+        .logo-wrapper {
+            img.logo-icon {
+                margin: auto;
+            }
+        }
+    }
+}
+
+google-map {
+    display: block;
+    width: 100%;
+    height: 100%;
+}

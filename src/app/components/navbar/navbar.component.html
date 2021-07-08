@@ -1,0 +1,21 @@
+<ion-toolbar>
+  <div class="logo-wrapper" slot="start">
+    <img class="logo-icon" src="assets/img/icon.svg" />
+    <img class="logo-name" src="assets/img/name.svg" />
+  </div>
+  <ion-buttons slot="end">
+    <ion-button [color]="router.url == '/tabs/search' ? 'primary' : 'medium'">
+      <ion-icon name="search-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+    <ion-button [color]="router.url == '/tabs/message-inbox' ? 'primary' : 'medium'" (click)="navigateTo('tabs/message-inbox')">
+      <ion-icon name="chatbubbles-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+    <ion-button [color]="router.url == '/tabs/notifications' ? 'primary' : 'medium'">
+      <ion-icon name="notifications-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+    <!-- <ion-button color="medium">
+      <ion-icon name="menu-outline" slot="icon-only"></ion-icon>
+    </ion-button> -->
+    <ion-menu-button color="medium"></ion-menu-button>
+  </ion-buttons>
+</ion-toolbar>

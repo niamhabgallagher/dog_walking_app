@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'Doggi Walks',
+  appId: 'com.doggiwalks.app',
+  appName: 'DoggiWalks',
   webDir: 'www',
   bundledWebRuntime: false
 };
